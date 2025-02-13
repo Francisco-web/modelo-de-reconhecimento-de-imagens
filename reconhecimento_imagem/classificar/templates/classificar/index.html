@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de Imagens</title>
+    <link rel="stylesheet" href="{% static 'classificar/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Classificação de Imagens</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="image">Escolha uma imagem:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <button type="submit">Classificar</button>
+        </form>
+
+        {% if image_url and predicted_class %}
+        <div class="result">
+            <h2>Resultado:</h2>
+            <img src="{{ image_url }}" alt="Imagem enviada">
+            <p>Categoria: <strong>{{ predicted_class }}</strong></p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
